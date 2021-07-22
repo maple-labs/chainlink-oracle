@@ -5,7 +5,7 @@ import { Ownable } from "../../../../lib/openzeppelin-contracts/contracts/access
 
 import { IChainlinkAggregatorV3 } from "../../../external-interfaces/IChainlinkAggregatorV3.sol";
 
-import { IMapleGlobals } from "../../globals/v1/interfaces/IMapleGlobals.sol";
+import { IMapleGlobals } from "../../globals/contracts/interfaces/IMapleGlobals.sol";
 
 import { IChainlinkOracle } from "./interfaces/IChainlinkOracle.sol";
 
