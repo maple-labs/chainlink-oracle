@@ -1,0 +1,37 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/interfaces/IChainlinkOracle.sol": {
+      "urls": ["contracts/interfaces/IChainlinkOracle.sol"]
+    },
+    "contracts/interfaces/IChainlinkAggregatorV3.sol": {
+      "urls": ["contracts/interfaces/IChainlinkAggregatorV3.sol"]
+    },
+    "contracts/ChainlinkOracle.sol": {
+      "urls": ["contracts/ChainlinkOracle.sol"]
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "devdoc",
+          "userdoc",
+          "metadata",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.gasEstimates"
+        ],
+        "": ["ast"]
+      }
+    },
+    "metadata": {
+      "bytecodeHash": "none"
+    }
+  }
+}

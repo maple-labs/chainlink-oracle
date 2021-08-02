@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity 0.6.11;
 
-import { Ownable } from "../../../../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
+import { Ownable } from "../modules/openzeppelin-contracts/contracts/access/Ownable.sol";
 
-import { IChainlinkAggregatorV3 } from "../../../external-interfaces/IChainlinkAggregatorV3.sol";
+import { IChainlinkAggregatorV3 } from "./interfaces/IChainlinkAggregatorV3.sol";
 
-import { IMapleGlobals } from "../../globals/contracts/interfaces/IMapleGlobals.sol";
+import { IMapleGlobals } from "../modules/globals/contracts/interfaces/IMapleGlobals.sol";
 
 import { IChainlinkOracle } from "./interfaces/IChainlinkOracle.sol";
 
