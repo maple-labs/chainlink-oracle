@@ -25,20 +25,38 @@ contract FakeFoo {
     }
 }
 
+contract ChainlinkAggregatorLike {
+
+    function latestRoundData()
+    external
+    pure
+    returns (
+        uint80  roundId,
+        int256  answer,
+        uint256 startedAt,
+        uint256 updatedAt,
+        uint80  answeredInRound
+    ) {
+        return (uint80(1), int256(2000), 1231, 1231, uint80(12));
+    }
+}
+
 contract ChainlinkOracleTest is DSTest {
 
-    ChainlinkOracle        oracle;
-    SecurityAdmin   securityAdmin;
-    FakeFoo               fakeFoo;
+    ChainlinkOracle                  oracle;
+    SecurityAdmin             securityAdmin;
+    FakeFoo                         fakeFoo;
+    ChainlinkAggregatorLike  wethAggregator;
 
-    address constant wethAggregator = 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419;
-    address constant WETH           = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    address constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
 
 
     function setUp() public {
-        securityAdmin = new SecurityAdmin();
-        oracle        = new ChainlinkOracle(wethAggregator, WETH, address(securityAdmin));
-        fakeFoo       = new FakeFoo();
+        securityAdmin  = new SecurityAdmin();
+        wethAggregator = new ChainlinkAggregatorLike();
+        oracle         = new ChainlinkOracle(address(wethAggregator), WETH, address(securityAdmin));
+        fakeFoo        = new FakeFoo();
+
     }
 
     function test_getLatestPrice() public {
