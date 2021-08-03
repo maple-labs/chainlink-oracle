@@ -35,6 +35,11 @@ interface IChainlinkOracle is IOracle {
     function priceFeed() external view returns (IChainlinkAggregatorV3);
 
     /**
+        @dev The MapleGlobals.
+     */
+    function globals() external view returns (address); 
+
+    /**
         @dev The address of the asset token contract.
      */
     function assetAddress() external view returns (address);

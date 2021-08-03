@@ -12,6 +12,7 @@ contract ChainlinkOracle is IChainlinkOracle, Ownable {
     IChainlinkAggregatorV3 public override priceFeed;
 
     address public override immutable assetAddress;
+    address public override globals;
 
     bool   public override manualOverride;
     int256 public override manualPrice;
