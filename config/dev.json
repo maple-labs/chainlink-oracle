@@ -1,12 +1,6 @@
 {
   "language": "Solidity",
   "sources": {
-     "contracts/interfaces/IChainlinkOracle.sol": {
-      "urls": ["contracts/interfaces/IChainlinkOracle.sol"]
-    },
-    "contracts/interfaces/IChainlinkAggregatorV3.sol": {
-      "urls": ["contracts/interfaces/IChainlinkAggregatorV3.sol"]
-    },
     "contracts/ChainlinkOracle.sol": {
       "urls": ["contracts/ChainlinkOracle.sol"]
     },
