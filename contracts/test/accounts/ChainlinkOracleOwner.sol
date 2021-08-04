@@ -3,7 +3,7 @@ pragma solidity 0.6.11;
 
 import { IChainlinkOracle } from "../../interfaces/IChainlinkOracle.sol";
 
-contract SecurityAdmin {
+contract ChainlinkOracleOwner {
 
     function setManualPrice(address target, int256 price) external { 
         IChainlinkOracle(target).setManualPrice(price); 
