@@ -1,21 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity 0.6.11;
 
-import { Ownable } from "../../../../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
+import { Ownable } from "../modules/openzeppelin-contracts/contracts/access/Ownable.sol";
 
-import { IChainlinkAggregatorV3 } from "../../../external-interfaces/IChainlinkAggregatorV3.sol";
-
-import { IMapleGlobals } from "../../globals/contracts/interfaces/IMapleGlobals.sol";
-
-import { IChainlinkOracle } from "./interfaces/IChainlinkOracle.sol";
+import { IChainlinkAggregatorV3 } from "./interfaces/IChainlinkAggregatorV3.sol";
+import { IChainlinkOracle }       from "./interfaces/IChainlinkOracle.sol";
 
 /// @title ChainlinkOracle is a wrapper contract for Chainlink oracle price feeds that allows for manual price feed overrides.
 contract ChainlinkOracle is IChainlinkOracle, Ownable {
 
     IChainlinkAggregatorV3 public override priceFeed;
-    IMapleGlobals public override globals;
 
     address public override immutable assetAddress;
+    address public override globals;
 
     bool   public override manualOverride;
     int256 public override manualPrice;

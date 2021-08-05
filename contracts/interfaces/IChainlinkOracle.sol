@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity 0.6.11;
 
-import { IChainlinkAggregatorV3 } from "../../../../external-interfaces/IChainlinkAggregatorV3.sol";
+import { IOracle } from "../../modules/oracle/contracts/interfaces/IOracle.sol";
 
-import { IMapleGlobals } from "../../../globals/contracts/interfaces/IMapleGlobals.sol";
-import { IOracle }       from "../../../oracle/contracts/interfaces/IOracle.sol";
+import { IChainlinkAggregatorV3 } from "./IChainlinkAggregatorV3.sol";
 
 /// @title ChainlinkOracle is a wrapper contract for Chainlink oracle price feeds that allows for manual price feed overrides.
 interface IChainlinkOracle is IOracle {
@@ -37,7 +36,7 @@ interface IChainlinkOracle is IOracle {
     /**
         @dev The MapleGlobals.
      */
-    function globals() external view returns (IMapleGlobals);
+    function globals() external view returns (address); 
 
     /**
         @dev The address of the asset token contract.

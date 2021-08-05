@@ -1,3 +1,12 @@
-[submodule "lib/ds-test"]
-	path = lib/ds-test
-	url = https://github.com/dapphub/ds-test
+[submodule "modules/globals"]
+	path = modules/globals
+	url = https://github.com/maple-labs/globals.git
+[submodule "modules/ds-test"]
+	path = modules/ds-test
+	url = https://github.com/dapphub/ds-test.git
+[submodule "modules/openzeppelin-contracts"]
+	path = modules/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts.git
+[submodule "modules/oracle"]
+	path = modules/oracle
+	url = https://github.com/maple-labs/oracle.git
