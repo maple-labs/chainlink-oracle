@@ -7,7 +7,7 @@ import { ChainlinkOracle } from "../ChainlinkOracle.sol";
 
 import { ChainlinkOracleOwner } from "./accounts/ChainlinkOracleOwner.sol";
 
-contract ChainlinkAggregatorLike {
+contract ChainlinkAggregatorMock {
 
     function latestRoundData()
     external
@@ -21,19 +21,20 @@ contract ChainlinkAggregatorLike {
     ) {
         return (uint80(1), int256(2000), 1231, 1231, uint80(12));
     }
+
 }
 
 contract ChainlinkOracleTest is DSTest {
 
-    ChainlinkOracle                  oracle;
-    ChainlinkOracleOwner    realOracleOwner;
-    ChainlinkOracleOwner    fakeOracleOwner;
-    ChainlinkAggregatorLike  wethAggregator;
+    ChainlinkOracle          oracle;
+    ChainlinkOracleOwner     realOracleOwner;
+    ChainlinkOracleOwner     fakeOracleOwner;
+    ChainlinkAggregatorMock  wethAggregator;
 
     function setUp() public {
         realOracleOwner = new ChainlinkOracleOwner();
         fakeOracleOwner = new ChainlinkOracleOwner();
-        wethAggregator  = new ChainlinkAggregatorLike();
+        wethAggregator  = new ChainlinkAggregatorMock();
         oracle          = new ChainlinkOracle(address(wethAggregator), address(1), address(realOracleOwner));
     }
 

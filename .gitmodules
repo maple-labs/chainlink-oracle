@@ -7,9 +7,6 @@
 [submodule "modules/openzeppelin-contracts"]
 	path = modules/openzeppelin-contracts
 	url = https://github.com/Openzeppelin/openzeppelin-contracts.git
-[submodule "oracle"]
-	path = oracle
-	url = https://github.com/maple-labs/oracle.git
 [submodule "modules/oracle"]
 	path = modules/oracle
 	url = https://github.com/maple-labs/oracle.git
