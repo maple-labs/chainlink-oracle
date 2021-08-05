@@ -61,10 +61,10 @@ contract ChainlinkOracleTest is DSTest {
         assertEq(oracle.getLatestPrice(), int256(45000));
 
         // Change aggregator
-        assertTrue(!fakeOracleOwner.try_chainlinkOracle_changeAggregator(address(oracle), 0xb022E2970b3501d8d83eD07912330d178543C1eB));
-        assertTrue( realOracleOwner.try_chainlinkOracle_changeAggregator(address(oracle), 0xb022E2970b3501d8d83eD07912330d178543C1eB));
+        assertTrue(!fakeOracleOwner.try_chainlinkOracle_changeAggregator(address(oracle), address(2)));
+        assertTrue( realOracleOwner.try_chainlinkOracle_changeAggregator(address(oracle), address(2)));
         
-        assertEq(address(oracle.priceFeed()), 0xb022E2970b3501d8d83eD07912330d178543C1eB);
+        assertEq(address(oracle.priceFeed()), address(2));
     }
 
 }
