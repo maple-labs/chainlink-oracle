@@ -1,0 +1,8 @@
+name: chainlink-oracle
+version: 1.0.0
+source: contracts
+packages:
+  - path: contracts/ChainlinkOracle.sol
+    contractName: ChainlinkOracle
+    customChecksum: 0x1592328cbe2f0cccf8b20bab1d4231e6b90be1c8991d6e63dc4b86ea0bf0754c
+customDescription: Chainlink Oracle Artifacts and ABIs
