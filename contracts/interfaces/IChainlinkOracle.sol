@@ -61,7 +61,7 @@ interface IChainlinkOracle is IOracle {
     /**
         @dev   Updates the aggregator address to `aggregator`. 
         @dev   Only the contract Owner can call this function. 
-        @dev   It emits a `ChangeAggregatorFeed` event. 
+        @dev   It emits a `ChangeAggregatorFeed` event.
         @param aggregator The address of a Chainlink aggregator.
      */
     function changeAggregator(address aggregator) external;
@@ -80,7 +80,7 @@ interface IChainlinkOracle is IOracle {
         @dev   Sets a manual price. 
         @dev   Only the contract Owner can call this function. 
         @dev   This can only be used if manualOverride == true. 
-        @dev   It emits a `SetManualPrice` event. 
+        @dev   It emits a `SetManualPrice` event.
         @param _price Price to set.
      */
     function setManualPrice(int256 _price) external;
@@ -88,7 +88,7 @@ interface IChainlinkOracle is IOracle {
     /**
         @dev   Sets manual override, allowing for manual price setting. 
         @dev   Only the contract Owner can call this function. 
-        @dev   It emits a `SetManualOverride` event. 
+        @dev   It emits a `SetManualOverride` event.
         @param _override Whether manual override price should be used.
      */
     function setManualOverride(bool _override) external;

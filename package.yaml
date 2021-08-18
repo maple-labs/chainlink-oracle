@@ -1,5 +1,5 @@
 name: chainlink-oracle
-version: 1.0.0
+version: 1.0.1
 source: contracts
 packages:
   - path: contracts/ChainlinkOracle.sol
