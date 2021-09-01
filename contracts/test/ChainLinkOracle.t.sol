@@ -5,20 +5,21 @@ import { DSTest } from "../../modules/ds-test/src/test.sol";
 
 import { ChainlinkOracle } from "../ChainlinkOracle.sol";
 
-import { ChainlinkOracleOwner } from "./accounts/ChainlinkOracleOwner.sol";
+import { Owner } from "./accounts/Owner.sol";
 
 contract ChainlinkAggregatorMock {
 
     function latestRoundData()
-    external
-    pure
-    returns (
-        uint80  roundId,
-        int256  answer,
-        uint256 startedAt,
-        uint256 updatedAt,
-        uint80  answeredInRound
-    ) {
+        external
+        pure
+        returns (
+            uint80  roundId,
+            int256  answer,
+            uint256 startedAt,
+            uint256 updatedAt,
+            uint80  answeredInRound
+        )
+    {
         return (uint80(1), int256(2000), 1231, 1231, uint80(12));
     }
 
@@ -26,16 +27,17 @@ contract ChainlinkAggregatorMock {
 
 contract ChainlinkOracleTest is DSTest {
 
-    ChainlinkOracle          oracle;
-    ChainlinkOracleOwner     realOracleOwner;
-    ChainlinkOracleOwner     fakeOracleOwner;
-    ChainlinkAggregatorMock  wethAggregator;
+    ChainlinkAggregatorMock wethAggregator;
+    ChainlinkOracle         oracle;
+    Owner                   notOwner;
+    Owner                   owner;
 
     function setUp() public {
-        realOracleOwner = new ChainlinkOracleOwner();
-        fakeOracleOwner = new ChainlinkOracleOwner();
-        wethAggregator  = new ChainlinkAggregatorMock();
-        oracle          = new ChainlinkOracle(address(wethAggregator), address(1), address(realOracleOwner));
+        notOwner       = new Owner();
+        owner          = new Owner();
+        wethAggregator = new ChainlinkAggregatorMock();
+
+        oracle = new ChainlinkOracle(address(wethAggregator), address(1), address(owner));
     }
 
     function test_getLatestPrice() public {
@@ -46,23 +48,23 @@ contract ChainlinkOracleTest is DSTest {
         assertEq(oracle.manualPrice(), int256(0));
 
         // Try to set manual price before setting the manual override.
-        assertTrue(!realOracleOwner.try_chainlinkOracle_setManualPrice(address(oracle), int256(45000)));
+        assertTrue(!owner.try_chainlinkOracle_setManualPrice(address(oracle), int256(45000)));
 
         // Enable oracle manual override
-        assertTrue(!fakeOracleOwner.try_chainlinkOracle_setManualOverride(address(oracle), true));
-        assertTrue( realOracleOwner.try_chainlinkOracle_setManualOverride(address(oracle), true));
+        assertTrue(!notOwner.try_chainlinkOracle_setManualOverride(address(oracle), true));
+        assertTrue(    owner.try_chainlinkOracle_setManualOverride(address(oracle), true));
         assertTrue(oracle.manualOverride());
 
         // Set price manually
-        assertTrue(!fakeOracleOwner.try_chainlinkOracle_setManualPrice(address(oracle), int256(45000)));
-        assertTrue( realOracleOwner.try_chainlinkOracle_setManualPrice(address(oracle), int256(45000)));
+        assertTrue(!notOwner.try_chainlinkOracle_setManualPrice(address(oracle), int256(45000)));
+        assertTrue(    owner.try_chainlinkOracle_setManualPrice(address(oracle), int256(45000)));
         
         assertEq(oracle.manualPrice(),    int256(45000));
         assertEq(oracle.getLatestPrice(), int256(45000));
 
         // Change aggregator
-        assertTrue(!fakeOracleOwner.try_chainlinkOracle_changeAggregator(address(oracle), address(2)));
-        assertTrue( realOracleOwner.try_chainlinkOracle_changeAggregator(address(oracle), address(2)));
+        assertTrue(!notOwner.try_chainlinkOracle_changeAggregator(address(oracle), address(2)));
+        assertTrue(    owner.try_chainlinkOracle_changeAggregator(address(oracle), address(2)));
         
         assertEq(address(oracle.priceFeed()), address(2));
     }

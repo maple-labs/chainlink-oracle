@@ -9,7 +9,7 @@ import { IChainlinkOracle }       from "./interfaces/IChainlinkOracle.sol";
 /// @title ChainlinkOracle is a wrapper contract for Chainlink oracle price feeds that allows for manual price feed overrides.
 contract ChainlinkOracle is IChainlinkOracle, Ownable {
 
-    IChainlinkAggregatorV3 public override priceFeed;
+    address public override priceFeed;
 
     address public override immutable assetAddress;
     address public override globals;
@@ -25,14 +25,14 @@ contract ChainlinkOracle is IChainlinkOracle, Ownable {
      */
     constructor(address _aggregator, address _assetAddress, address _owner) public {
         require(_aggregator != address(0), "CO:ZERO_AGGREGATOR_ADDR");
-        priceFeed       = IChainlinkAggregatorV3(_aggregator);
+        priceFeed       = _aggregator;
         assetAddress    = _assetAddress;
         transferOwnership(_owner);
     }
 
     function getLatestPrice() public override view returns (int256) {
         if (manualOverride) return manualPrice;
-        (uint80 roundID, int256 price,,uint256 timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
+        (uint80 roundID, int256 price,,uint256 timeStamp, uint80 answeredInRound) = IChainlinkAggregatorV3(priceFeed).latestRoundData();
 
         require(timeStamp != 0,             "CO:ROUND_NOT_COMPLETE");
         require(answeredInRound >= roundID,         "CO:STALE_DATA");
@@ -42,8 +42,8 @@ contract ChainlinkOracle is IChainlinkOracle, Ownable {
 
     function changeAggregator(address aggregator) external override onlyOwner {
         require(aggregator != address(0), "CO:ZERO_AGGREGATOR_ADDR");
-        emit ChangeAggregatorFeed(aggregator, address(priceFeed));
-        priceFeed = IChainlinkAggregatorV3(aggregator);
+        emit ChangeAggregatorFeed(aggregator, priceFeed);
+        priceFeed = aggregator;
     }
 
     function getAssetAddress() external override view returns (address) {
