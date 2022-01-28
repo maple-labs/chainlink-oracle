@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-pragma solidity 0.6.11;
+pragma solidity 0.8.7;
 
-import { IOracle } from "../../modules/oracle/contracts/interfaces/IOracle.sol";
+// import { IOracle } from "../../modules/oracle/contracts/interfaces/IOracle.sol";
 
 /// @title ChainlinkOracle is a wrapper contract for Chainlink oracle price feeds that allows for manual price feed overrides.
-interface IChainlinkOracle is IOracle {
+interface IChainlinkOracle {
 
     /**
         @dev   Emits an event indicating that the price feed aggregator has changed from `_oldMedianizer` to `_newMedianizer`.
@@ -54,7 +54,7 @@ interface IChainlinkOracle is IOracle {
     /**
         @return The latest price.
      */
-    function getLatestPrice() external override view returns (int256);
+    function getLatestPrice() external view returns (int256);
 
     /**
         @dev   Updates the aggregator address to `aggregator`. 

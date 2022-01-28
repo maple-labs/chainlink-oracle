@@ -17,4 +17,4 @@ export DAPP_SRC="contracts"
 export DAPP_LINK_TEST_LIBRARIES=0
 export DAPP_STANDARD_JSON=$config
 
-dapp --use solc:0.6.11 build
+dapp --use solc:0.8.7 build
