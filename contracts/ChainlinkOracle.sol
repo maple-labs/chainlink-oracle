@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-pragma solidity 0.6.11;
+pragma solidity 0.8.7;
 
-import { Ownable } from "../modules/openzeppelin-contracts/contracts/access/Ownable.sol";
+import { Ownable } from "./Ownable.sol";
 
 import { IChainlinkAggregatorV3 } from "./interfaces/IChainlinkAggregatorV3.sol";
 import { IChainlinkOracle }       from "./interfaces/IChainlinkOracle.sol";
@@ -23,7 +23,7 @@ contract ChainlinkOracle is IChainlinkOracle, Ownable {
         @param _assetAddress Address of currency (0x0 for ETH).
         @param _owner        Address of the owner of the contract.
      */
-    constructor(address _aggregator, address _assetAddress, address _owner) public {
+    constructor(address _aggregator, address _assetAddress, address _owner) {
         require(_aggregator != address(0), "CO:ZERO_AGGREGATOR_ADDR");
         priceFeed       = _aggregator;
         assetAddress    = _assetAddress;

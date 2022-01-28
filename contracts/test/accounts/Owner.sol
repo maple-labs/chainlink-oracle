@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-pragma solidity 0.6.11;
+pragma solidity 0.8.7;
 
-import { Ownable } from "../../../modules/openzeppelin-contracts/contracts/access/Ownable.sol";
+import { Ownable } from "../../Ownable.sol";
 
 import { IChainlinkOracle } from "../../interfaces/IChainlinkOracle.sol";
 
